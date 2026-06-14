@@ -37,12 +37,17 @@ class TotalPoints(PointsForPlace, PointsForMeters):
     
     def get_total_points(self, meters, place):  
         points_place = super().get_points_for_place(place)
-        points_meters = super().get_points_for_meters(meters)  
-        total = int(points_place + points_meters)
+        points_meters = super().get_points_for_meters(meters)
+
+
+#я нашел в интернете такой метод проверки, но мы вроде такого не проходили:
+        if isinstance(points_place, str):
+            return points_place
+        if isinstance(points_meters, str):
+            return points_meters
+
+        total = points_place + points_meters
         return total
-    
-
-
 
 points_for_place = PointsForPlace()
 print(points_for_place.get_points_for_place(10))
@@ -53,4 +58,4 @@ print(points_for_meters.get_points_for_meters(10))
 total_points = TotalPoints()
 print(total_points.get_points_for_place(10))
 print(total_points.get_points_for_meters(10))
-print(total_points.get_total_points(100, 10))
+print(total_points.get_total_points(-1, 0))
