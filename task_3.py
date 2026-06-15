@@ -7,9 +7,12 @@ class PointsForPlace:
         
         place = int(place)
         if place > 100: 
-            return "Баллы начисляются только первым 100 участникам"
+            print ("Баллы начисляются только первым 100 участникам")
+            return 0
+
         elif place < 1:
-            return 'Спортсмен не может занять нулевое или отрицательное место'
+            print('Спортсмен не может занять нулевое или отрицательное место')
+            return 0
         else:
             points = 101 - place
             return points
@@ -23,7 +26,8 @@ class PointsForMeters:
     def get_points_for_meters(meters):
         meters = int(meters)
         if meters < 0:
-            return 'Количество метров не может быть отрицательным'
+            print('Количество метров не может быть отрицательным')
+            return 0
         else:
             points = meters * 0.5
             return points 
@@ -40,12 +44,6 @@ class TotalPoints(PointsForPlace, PointsForMeters):
         points_meters = super().get_points_for_meters(meters)
 
 
-#я нашел в интернете такой метод проверки, но мы вроде такого не проходили:
-        if isinstance(points_place, str):
-            return points_place
-        if isinstance(points_meters, str):
-            return points_meters
-
         total = points_place + points_meters
         return total
 
@@ -58,4 +56,4 @@ print(points_for_meters.get_points_for_meters(10))
 total_points = TotalPoints()
 print(total_points.get_points_for_place(10))
 print(total_points.get_points_for_meters(10))
-print(total_points.get_total_points(-1, 0))
+print(total_points.get_total_points(100, 10))
